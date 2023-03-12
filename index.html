@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #paste {
+        width: 80%;
+        height: 60%;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 20px;
+        border: none;
+        resize: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <textarea id="paste" placeholder="Paste here!"></textarea>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script>
+      const gun = Gun(['http://localhost:8765/gun', 'https://gun-manhattan.herokuapp.com/gun']);
+      const copy = gun.get('test').get('paste');
+      const paste = document.getElementById('paste');
+      paste.oninput = () => { copy.put(paste.value) };
+      copy.on((data) => { paste.value = data });
+    </script>
+  </body>
+</html>
