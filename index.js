@@ -1,5 +1,3 @@
-const gun = Gun();
-
 gun.opt({ peers: ['http://localhost:3000/gun', 'https://prat.minfuel.com/gun'] });
 
 // Start the app
