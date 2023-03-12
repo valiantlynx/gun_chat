@@ -1,4 +1,4 @@
-const gun = Gun(['http://localhost:8765/gun', 'https://prat.minfuel.com/gun']);
+const gun = Gun(['http://localhost:3000/gun']);
 let currentUser = null;
 let chatNode = null;
 
@@ -20,6 +20,7 @@ function registerUser(event) {
     }
   });
 }
+
 function loginUser(username, password) {
   gun.get('users').get(username).once((data, key) => {
     if (data && data.password === password) {

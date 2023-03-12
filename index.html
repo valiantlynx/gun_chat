@@ -6,117 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gun Chat</title>
   <!-- Custom CSS -->
-  <!-- <link rel="stylesheet" href="https://raw.githubusercontent.com/valiantlynx/gun_chat/main/styles.css"> -->
+   <link rel="stylesheet" href="/styles.css">
   <style>
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    #login-form,
-    #chat-form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
-
-    #login-form {
-      background-color: #f0f0f0;
-    }
-
-    #login-form input[type="text"],
-    #login-form input[type="password"],
-    #chat-input {
-      width: 100%;
-      padding: 10px;
-      font-size: 18px;
-      margin-bottom: 10px;
-      border: none;
-      border-radius: 5px;
-    }
-
-    #login-form input[type="submit"],
-    #chat-button {
-      background-color: #008CBA;
-      color: #fff;
-      padding: 10px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #login-form input[type="submit"]:hover,
-    #chat-button:hover {
-      background-color: #006B8F;
-    }
-
-    #chat {
-      width: 100%;
-      height: 100%;
-      overflow-y: scroll;
-      padding: 10px;
-    }
-
-    .message {
-      margin-bottom: 10px;
-    }
-
-    .username {
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    .time {
-      color: #777;
-      margin-right: 10px;
-    }
-
-    .own-message {
-      background-color: #f0f0f0;
-    }
-
-    .delete-button {
-      background-color: #ff0000;
-      color: #ffffff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 1;
-    }
-
-
-    /* Dark theme toggle */
-    .dark-mode {
-      background-color: #000;
-      color: #fff;
-    }
-
-    .dark-mode #login-form input,
-    .dark-mode #chat-form input,
-    .dark-mode #login-button,
-    .dark-mode #send-button,
-    .dark-mode button {
-      background-color: #222;
-      color: #fff;
-    }
-
-    .dark-mode .own-message {
-      background-color: #222;
-      color: #b44040;
-    }
-
-
-    .dark-mode button:hover {
-      background-color: #444;
-    }
+   
   </style>
   <!-- <link rel="stylesheet" href="https://minfuel.no/static/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> -->
@@ -148,7 +40,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
   <!-- script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script -->
-  <script src="https://raw.githubusercontent.com/valiantlynx/gun_chat/main/index.js"></script>
+  <script src="/index.js"></script>
   <script>
     function toggleDarkMode() {
       var element = document.body;

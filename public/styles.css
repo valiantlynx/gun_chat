@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -6,7 +7,8 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
-#login-form, #chat-form {
+#login-form,
+#chat-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +20,9 @@ html, body {
   background-color: #f0f0f0;
 }
 
-#login-form input[type="text"], #login-form input[type="password"], #chat-input {
+#login-form input[type="text"],
+#login-form input[type="password"],
+#chat-input {
   width: 100%;
   padding: 10px;
   font-size: 18px;
@@ -27,7 +31,8 @@ html, body {
   border-radius: 5px;
 }
 
-#login-form input[type="submit"], #chat-button {
+#login-form input[type="submit"],
+#chat-button {
   background-color: #008CBA;
   color: #fff;
   padding: 10px;
@@ -37,7 +42,8 @@ html, body {
   cursor: pointer;
 }
 
-#login-form input[type="submit"]:hover, #chat-button:hover {
+#login-form input[type="submit"]:hover,
+#chat-button:hover {
   background-color: #006B8F;
 }
 
@@ -65,21 +71,39 @@ html, body {
 .own-message {
   background-color: #f0f0f0;
 }
-     /* Dark theme toggle */
-  .dark-mode {
-    background-color: #000;
-    color: #fff;
-    }
-    
-    .dark-mode #login-form input,
-    .dark-mode #chat-form input,
-    .dark-mode #login-button,
-    .dark-mode #send-button,
-    .dark-mode button {
-    background-color: #222;
-    color: #fff;
-    }
-    
-    .dark-mode button:hover {
-    background-color: #444;
-    }
+
+.delete-button {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+
+/* Dark theme toggle */
+.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+.dark-mode #login-form input,
+.dark-mode #chat-form input,
+.dark-mode #login-button,
+.dark-mode #send-button,
+.dark-mode button {
+  background-color: #222;
+  color: #fff;
+}
+
+.dark-mode .own-message {
+  background-color: #222;
+  color: #b44040;
+}
+
+
+.dark-mode button:hover {
+  background-color: #444;
+}
