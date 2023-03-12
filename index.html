@@ -33,7 +33,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script>
-      const gun = Gun(['http://localhost:8765/gun', 'https://minfuel.com/gun']);
+      const gun = Gun(['http://localhost:8765/gun', 'https://minfuel.com']);
       const copy = gun.get('test').get('paste');
       const paste = document.getElementById('paste');
       paste.oninput = () => { copy.put(paste.value) };
