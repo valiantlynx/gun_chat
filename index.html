@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script>
-      const gun = Gun(['http://localhost:8765/gun', 'https://minfuel.com']);
+      const gun = Gun(['http://localhost:8765/gun', 'https://valiantlynx-crispy-bassoon-946qwr67rwxcpvxp-3000.preview.app.github.dev/']);
       const copy = gun.get('test').get('paste');
       const paste = document.getElementById('paste');
       paste.oninput = () => { copy.put(paste.value) };
