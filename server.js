@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const http = require('http');
 const Gun = require('gun');
+const cors = require('cors');
+app.use(cors());
+
 
 const app = express();
 
@@ -15,8 +18,6 @@ app.get('/', function(req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-const cors = require('cors');
-app.use(cors());
 
 app.delete('/messages/:id', (req, res) => {
   const id = req.params.id;
