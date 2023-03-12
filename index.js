@@ -1,3 +1,5 @@
+const gun = Gun();
+
 gun.opt({ peers: ['http://localhost:3000/gun', 'https://prat.minfuel.com/gun'] });
 
 // Start the app
@@ -74,19 +76,7 @@ function sendMessage(event) {
 }
 
 
-function deleteMessage(id, username) {
-  // gun.get('messages').get(id).once((data, key) => {
-  //   if (data && data.username === username) {
-  //     gun.get('messages').get(id).put(null);
-  //   }
-  // });
 
-
-  function deleteMessage(id) {
-    gun.get('messages').get(id).put(null);
-  }
-  
-}
 
 gun.on('auth', () => {
   const user = gun.user();
@@ -118,11 +108,7 @@ gun.get('messages').map().on((data, key) => {
     const text = document.createElement('span');
     text.textContent = data.message;
 
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('delete-button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.addEventListener('click', () => deleteMessage(data.id));
-    message.appendChild(deleteButton);
+
     message.appendChild(username);
     message.appendChild(time);
     message.appendChild(text);
