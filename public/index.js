@@ -1,4 +1,4 @@
-const gun = Gun(['http://localhost:3000/gun']);
+const gun = Gun(['https://valiantlynx-crispy-bassoon-946qwr67rwxcpvxp-3000.preview.app.github.dev/gun', 'https://prat.minfuel.com']);
 let currentUser = null;
 let chatNode = null;
 
