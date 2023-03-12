@@ -71,3 +71,21 @@
     .own-message {
       background-color: #f0f0f0;
     }
+     /* Dark theme toggle */
+  .dark-mode {
+    background-color: #000;
+    color: #fff;
+    }
+    
+    .dark-mode #login-form input,
+    .dark-mode #chat-form input,
+    .dark-mode #login-button,
+    .dark-mode #send-button,
+    .dark-mode button {
+    background-color: #222;
+    color: #fff;
+    }
+    
+    .dark-mode button:hover {
+    background-color: #444;
+    }
