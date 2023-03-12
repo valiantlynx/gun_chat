@@ -233,6 +233,13 @@
       }
     });
 
+      // Check for cached user
+      const cachedUser = localStorage.getItem('currentUser');
+    const cachedPassword = localStorage.getItem('currentPassword');
+    if (cachedUser && cachedPassword) {
+      loginUser(cachedUser, cachedPassword);
+    }
+
   </script>
 </body>
 
