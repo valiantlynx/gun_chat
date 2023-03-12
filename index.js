@@ -1,6 +1,8 @@
-const Gun = require('gun');
+const gun = Gun();
 
-const gun = Gun(['http://localhost:8765/gun', 'https://minfuel.com/gun']);
+gun.opt({ peers: ['http://localhost:3000/gun', 'https://prat.minfuel.com/gun'] });
+
+// Start the app
 let currentUser = null;
 let chatNode = null;
 
@@ -52,10 +54,15 @@ function loginUser(username, password) {
 
 function logoutUser() {
   currentUser = null;
+  localStorage.removeItem('currentUser');
+  localStorage.removeItem('currentPassword');
   gun.user().leave();
   document.getElementById('chat').innerHTML = '';
   document.getElementById('chat-form').style.display = 'none';
   document.getElementById('login-form').style.display = 'flex';
+  document.getElementById('username-input').value = '';
+  document.getElementById('password-input').value = '';
+  document.getElementById('username-input').focus();
 }
 
 function sendMessage(event) {
@@ -63,9 +70,24 @@ function sendMessage(event) {
   const message = document.getElementById('chat-input').value.trim();
   if (message !== '') {
     const time = new Date().getTime();
-    gun.get('messages').set({ username: currentUser, message, time });
+    gun.get('messages').set({ username: currentUser, message, time, id: gun.user().is.pub });
     document.getElementById('chat-input').value = '';
   }
+}
+
+
+function deleteMessage(id, username) {
+  // gun.get('messages').get(id).once((data, key) => {
+  //   if (data && data.username === username) {
+  //     gun.get('messages').get(id).put(null);
+  //   }
+  // });
+
+
+  function deleteMessage(id) {
+    gun.get('messages').get(id).put(null);
+  }
+  
 }
 
 gun.on('auth', () => {
@@ -83,6 +105,7 @@ gun.get('messages').map().on((data, key) => {
     const message = document.createElement('div');
     message.classList.add('message');
     if (data.username === currentUser) {
+      message.classList.add('dark-mode');
       message.classList.add('own-message');
     }
 
@@ -97,45 +120,51 @@ gun.get('messages').map().on((data, key) => {
     const text = document.createElement('span');
     text.textContent = data.message;
 
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => deleteMessage(data.id));
+    message.appendChild(deleteButton);
     message.appendChild(username);
     message.appendChild(time);
     message.appendChild(text);
+ 
 
     document.getElementById('chat').appendChild(message);
     document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
   }
 });
+function main() {
 
-document.getElementById('register-button').addEventListener('click', registerUser);
-document.getElementById('login-button').addEventListener('click', (event) => {
-  event.preventDefault();
-  const username = document.getElementById('username-input').value.trim();
-  const password = document.getElementById('password-input').value.trim();
+  document.getElementById('register-button').addEventListener('click', registerUser);
+  document.getElementById('login-button').addEventListener('click', (event) => {
+    event.preventDefault();
+    const username = document.getElementById('username-input').value.trim();
+    const password = document.getElementById('password-input').value.trim();
 
-  if (username === '' || password === '') {
-    alert('Please enter a username and password');
-    return;
-  }
+    if (username === '' || password === '') {
+      alert('Please enter a username and password');
+      return;
+    }
 
-  loginUser(username, password);
-});
-document.getElementById('logout-button').addEventListener('click', logoutUser);
-document.getElementById('send-button').addEventListener('click', sendMessage);
-document.getElementById('chat-input').addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') {
-    sendMessage(event);
-  }
-});
+    loginUser(username, password);
+  });
+  document.getElementById('logout-button').addEventListener('click', logoutUser);
+  document.getElementById('send-button').addEventListener('click', sendMessage);
+  document.getElementById('delete-button').addEventListener('click', deleteMessage);
+  document.getElementById('chat-input').addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      sendMessage(event);
+    }
+  });
+}
+
+main()
+
 
 // Check for cached user
 const cachedUser = localStorage.getItem('currentUser');
 const cachedPassword = localStorage.getItem('currentPassword');
 if (cachedUser && cachedPassword) {
   loginUser(cachedUser, cachedPassword);
-}
-
-
-function toggleDarkMode() {
-  var element = document.body;
-  element.classList.toggle("dark-mode");
 }

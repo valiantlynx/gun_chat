@@ -1,43 +1,40 @@
-// const http = require('http');
-// const Gun = require('gun');
-
-// const port = process.env.PORT || 8080;
-
-// const server = http.createServer((req, res) => {
-//   res.writeHead(200);
-//   res.end('Hello, Gun.js!');
-// });
-
-
-
-// const gun = Gun({
-//   web: server.listen(port),
-//   file: 'data',
-// });
-
-// console.log(`Gun server running on port ${port}`);
-
-
 const express = require("express");
 const bodyParser = require("body-parser");
-const _ = require("lodash");
+const http = require('http');
+const Gun = require('gun');
 
 const app = express();
 
 app.set('view engine', "ejs");
-
-
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
 
+const server = http.createServer(app);
+const gun = Gun({ web: server });
 
 app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/index.html');
-  });
-
-  
-app.listen(3000, function(req, res) {
-    console.log("Server is running successfully");
+  res.sendfile(__dirname + '/index.html');
 });
+
+const cors = require('cors');
+app.use(cors());
+
+app.delete('/messages/:id', (req, res) => {
+  const id = req.params.id;
+  gun.get('messages').get(id).once((data, key) => {
+    if (data) {
+      gun.get('messages').get(id).put(null);
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
+    }
+  });
+});
+
+
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
 
 
