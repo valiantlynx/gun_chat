@@ -6,15 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gun Chat</title>
   <!-- Custom CSS -->
-   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css">
   <style>
- 
-      ul { padding: 0; }
-      li { display: flex; }
-      li span { width: 150px; word-break: break-all; }
-      img { height: 20px; margin-left: 8px; cursor: pointer; }
-      input { width: 150px; margin-right: 8px; }
-      input[type='checkbox'] { width: auto; }
+    ul {
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+    }
+
+    li span {
+      width: 150px;
+      word-break: break-all;
+    }
+
+    img {
+      height: 20px;
+      margin-left: 8px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 150px;
+      margin-right: 8px;
+    }
+
+    input[type='checkbox'] {
+      width: auto;
+    }
   </style>
   <!-- <link rel="stylesheet" href="https://minfuel.no/static/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> -->
@@ -41,12 +61,6 @@
     <button class="dark-mode button" id="logout-button">Log Out</button>
     <button class="dark-mode button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
     <button onclick="deleteAllMessages()">Delete all messages</button>
-    <h1>Todos</h1>
-
-    <ul></ul>
-
-    <form><input><button>Add</button></form>
-
   </div>
 
   <!-- Custom JS -->

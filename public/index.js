@@ -1,4 +1,4 @@
-const gun = Gun(['https://valiantlynx-crispy-bassoon-946qwr67rwxcpvxp-3000.preview.app.github.dev/gun', 'https://prat.minfuel.com/gun']);
+const gun = Gun(['http://localhost:8080/gun']);
 let currentUser = null;
 let chatNode = null;
 
@@ -76,38 +76,47 @@ gun.on('auth', () => {
 });
 
 function addMessage(data) {
-  console.log("data", data);
-  const { username, message: message, time } = data;
-  console.log("message", message)
-  console.log("username", username)
-  console.log("time", time)
-  console.log("text", message)
+
+  try {
+    console.log("data", data);
+    const { username, message, time } = data;
+    console.log("message", message)
+    console.log("username", username)
+    console.log("time", time)
+    console.log("text", message)
 
 
-  if (username && message && time) {
-    const message = document.createElement('div');
-    message.classList.add('message');
-    if (username === currentUser) {
-      message.classList.add('own-message');
+    if (username && message && time) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      if (username === currentUser) {
+        messageElement.classList.add('own-message');
+      }
+
+      const usernameElement = document.createElement('span');
+      usernameElement.classList.add('username');
+      usernameElement.textContent = username;
+
+      const timeElement = document.createElement('span');
+      timeElement.classList.add('time');
+      timeElement.textContent = new Date(time).toLocaleTimeString();
+
+      const textElement = document.createElement('span');
+      textElement.textContent = message;
+      messageElement.appendChild(usernameElement);
+      messageElement.appendChild(timeElement);
+      messageElement.appendChild(textElement);
+
+      document.getElementById('chat').appendChild(messageElement);
+      document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
     }
 
-    const username = document.createElement('span');
-    username.classList.add('username');
-    username.textContent = username;
 
-    const time = document.createElement('span');
-    time.classList.add('time');
-    time.textContent = new Date(time).toLocaleTimeString();
 
-    const text = document.createElement('span');
-    text.textContent = message;
-    message.appendChild(username);
-    message.appendChild(time);
-    message.appendChild(text);
-
-    document.getElementById('chat').appendChild(message);
-    document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+  } catch (error) {
+    console.log("error", error)
   }
+
 }
 
 
