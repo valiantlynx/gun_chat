@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const server = http.createServer(app);
+
 const gun = Gun({ web: server });
 
 app.get('/', function(req, res) {
@@ -26,17 +27,7 @@ app.get('/gun', function(req, res) {
 });
 
 
-app.delete('/messages/:id', (req, res) => {
-  const id = req.params.id;
-  gun.get('messages').get(id).once((data, key) => {
-    if (data) {
-      gun.get('messages').get(id).put(null);
-      res.sendStatus(200);
-    } else {
-      res.sendStatus(404);
-    }
-  });
-});
+
 
 
 const port = process.env.PORT || 3000;

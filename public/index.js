@@ -1,6 +1,7 @@
-const gun = Gun(['https://valiantlynx-crispy-bassoon-946qwr67rwxcpvxp-3000.preview.app.github.dev/gun', 'https://prat.minfuel.com']);
+const gun = Gun(['https://valiantlynx-crispy-bassoon-946qwr67rwxcpvxp-3000.preview.app.github.dev/gun', 'https://prat.minfuel.com/gun']);
 let currentUser = null;
 let chatNode = null;
+
 
 function registerUser(event) {
   event.preventDefault();
@@ -34,11 +35,8 @@ function loginUser(username, password) {
       localStorage.setItem('currentPassword', password);
 
       // Load chat history
-      gun.get('messages').once((data, key) => {
-        Object.values(data).forEach((message) => {
-          addMessage(message);
-        });
-
+      gun.get('messages').map().once((data, key) => {
+        addMessage(data);
         // Scroll to the bottom of the chat
         document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
       });
@@ -77,25 +75,32 @@ gun.on('auth', () => {
   }
 });
 
-gun.get('messages').map().on((data, key) => {
-  if (data.username && data.message && data.time) {
+function addMessage(data) {
+  console.log("data", data);
+  const { username, message: message, time } = data;
+  console.log("message", message)
+  console.log("username", username)
+  console.log("time", time)
+  console.log("text", message)
+
+
+  if (username && message && time) {
     const message = document.createElement('div');
     message.classList.add('message');
-    if (data.username === currentUser) {
+    if (username === currentUser) {
       message.classList.add('own-message');
     }
 
     const username = document.createElement('span');
     username.classList.add('username');
-    username.textContent = data.username;
+    username.textContent = username;
 
     const time = document.createElement('span');
     time.classList.add('time');
-    time.textContent = new Date(data.time).toLocaleTimeString();
+    time.textContent = new Date(time).toLocaleTimeString();
 
     const text = document.createElement('span');
-    text.textContent = data.message;
-
+    text.textContent = message;
     message.appendChild(username);
     message.appendChild(time);
     message.appendChild(text);
@@ -103,7 +108,8 @@ gun.get('messages').map().on((data, key) => {
     document.getElementById('chat').appendChild(message);
     document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
   }
-});
+}
+
 
 document.getElementById('register-button').addEventListener('click', registerUser);
 document.getElementById('login-button').addEventListener('click', (event) => {
