@@ -1,7 +1,7 @@
-const gun = Gun(['http://localhost:8080/gun']);
+const gun = Gun({peers: ['http://localhost:8081/gun', 'https://prat.minfuel.com/gun']});
+const ws = new WebSocket('ws://localhost:8081/gun');
 let currentUser = null;
 let chatNode = null;
-
 
 function registerUser(event) {
   event.preventDefault();
@@ -85,7 +85,10 @@ function sendMessage(event) {
     const time = new Date().getTime();
     const id = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36)
     console.log("big ass id", id)
-    gun.get('messages').set({ username: currentUser, message, time, id });
+    const data = { username: currentUser, message, time, id };
+    const messageString = JSON.stringify({ action: 'add', data });
+    ws.send(messageString);
+    gun.get('messages').set(data);
     document.getElementById('chat-input').value = '';
   }
 }
@@ -166,6 +169,7 @@ function removeMessage(key) {
 function deleteMessage(id, username) {
   //console.log("id", id)
   //console.log("username", username)
+
   if (username === currentUser) {
 
     gun.get('messages').map().once((data, key) => {
@@ -176,6 +180,11 @@ function deleteMessage(id, username) {
           if (ack.err) {
             console.log("Error deleting message", ack.err);
           } else {
+            const confirmed = confirm('Are you sure you want to delete this message?');
+            if (confirmed) {
+              const messageString = JSON.stringify({ action: 'delete', data: id });
+              ws.send(messageString);
+            }
             console.log(ack);
             console.log("Message deleted successfully");
             removeMessage(id);
