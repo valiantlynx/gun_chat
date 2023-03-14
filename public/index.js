@@ -1,4 +1,4 @@
-const gun = Gun({peers: ['http://localhost:8081/gun', 'https://prat.minfuel.com/gun']});
+const gun = Gun({peers: ['http://localhost:8081/gun', 'https://prat.minfuel.com/gun', 'https://chat.valiantlynx.com/gun']});
 const ws = new WebSocket('ws://localhost:8081/gun');
 let currentUser = null;
 let chatNode = null;
@@ -37,6 +37,7 @@ function loginUser(username, password) {
     if (ack.err) {
       console.log("login username:", username, "login pass:", password)
       console.log('Login failed:', ack.err);
+      alert('Something went wrong. Please try again. are you sure you have an account?');
     } else {
       console.log('User authenticated');
       gun.get('users').get(username).once((data, key) => {
@@ -84,7 +85,7 @@ function sendMessage(event) {
   if (message !== '') {
     const time = new Date().getTime();
     const id = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36)
-    console.log("big ass id", id)
+    // console.log("big ass id", id)
     const data = { username: currentUser, message, time, id };
     const messageString = JSON.stringify({ action: 'add', data });
     ws.send(messageString);
@@ -105,13 +106,13 @@ gun.on('auth', () => {
 
 function addMessage(data) {
   try {
-    console.log("data", data);
+    // console.log("data", data);
     const { username, message, time, id } = data;
-    console.log("message", message)
-    console.log("username", username)
-    console.log("time", time)
-    console.log("text", message)
-    console.log("id", id)
+    // console.log("message", message)
+    // console.log("username", username)
+    // console.log("time", time)
+    // console.log("text", message)
+    // console.log("id", id)
 
 
     if (username && message && time) {

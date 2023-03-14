@@ -2,7 +2,7 @@ const Gun = require('gun');
 const WebSocket = require('ws');
 
 
-const gun = Gun({peers: ['http://localhost:8080/gun', 'https://prat.minfuel.com/gun']});
+const gun = Gun({peers: ['http://localhost:8765/gun']});
 
 const wss = new WebSocket.Server({ port: 8081 });
 
