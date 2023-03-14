@@ -2,7 +2,7 @@
 
 # remove old gun
 ls
-docker stop gun_chat_server
+docker stop gun
 docker system prune -a
 ls
 rm -rf gun
