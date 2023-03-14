@@ -1,5 +1,5 @@
-const gun = Gun({peers: ['http://localhost:8081/gun', 'https://prat.minfuel.com/gun', 'https://chat.valiantlynx.com/gun']});
-const ws = new WebSocket('ws://localhost:8081/gun');
+const gun = Gun(['https://chat.valiantlynx.com/gun']);
+
 let currentUser = null;
 let chatNode = null;
 
@@ -88,7 +88,7 @@ function sendMessage(event) {
     // console.log("big ass id", id)
     const data = { username: currentUser, message, time, id };
     const messageString = JSON.stringify({ action: 'add', data });
-    ws.send(messageString);
+
     gun.get('messages').set(data);
     document.getElementById('chat-input').value = '';
   }
@@ -184,7 +184,7 @@ function deleteMessage(id, username) {
             const confirmed = confirm('Are you sure you want to delete this message?');
             if (confirmed) {
               const messageString = JSON.stringify({ action: 'delete', data: id });
-              ws.send(messageString);
+       
             }
             console.log(ack);
             console.log("Message deleted successfully");
