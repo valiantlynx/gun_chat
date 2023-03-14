@@ -2,12 +2,12 @@
 
 # remove old gun
 ls
-sudo docker stop gun_chat_server
-sudo docker system prune -a
+docker stop gun_chat_server
+docker system prune -a
 ls
-sudo rm -rf gun
-sudo docker ps -a
-sudo docker images -a
+rm -rf gun
+docker ps -a
+docker images -a
 
 # install gun
 git clone https://github.com/amark/gun.git
