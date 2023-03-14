@@ -3,7 +3,7 @@
 # remove old gun
 ls
 docker stop gun
-docker system prune -a
+docker system prune -a -y
 
 ls
 rm -rf gun
