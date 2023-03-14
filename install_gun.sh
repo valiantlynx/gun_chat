@@ -4,6 +4,7 @@
 ls
 docker stop gun
 docker system prune -a
+
 ls
 rm -rf gun
 docker ps -a
