@@ -10,6 +10,7 @@ pids
 # Dependency directories
 node_modules/
 jspm_packages/
+gun/node_modules
 
 # Distribution directories
 dist/
