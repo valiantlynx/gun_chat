@@ -14,6 +14,9 @@ const server = http.createServer(app);
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
+app.get('/company', function(req, res) {
+  res.sendFile(__dirname + '/company.html');
+});
 
 app.get('/gun', function(req, res) {
   res.send(__dirname + '/index.js');
