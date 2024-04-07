@@ -8,11 +8,15 @@ on:
       - 'main'
     paths:
       - 'chat/**'
+      - 'gun/**'
+      - '.github/workflows/gun-chat.yaml'
   pull_request:
     branches:
       - 'main'
     paths:
       - 'chat/**'
+      - 'gun/**'
+      - '.github/workflows/gun-chat.yaml'
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:
