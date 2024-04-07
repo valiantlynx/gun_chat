@@ -12,13 +12,13 @@ app.use(express.static("public"));
 const server = http.createServer(app);
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname +  '/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 app.get('/company', function(req, res) {
   res.sendFile(__dirname + '/company.html');
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
