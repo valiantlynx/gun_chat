@@ -43,7 +43,7 @@ function addCompany(event) {
       };
 
       // Add the company to GunDB (Example: Storing under "companies" node)
-      const gun = Gun({ peers: ['http://localhost:8765/gun'] }); // Ensure you've initialized Gun correctly earlier in your script
+      const gun = Gun({ peers: ['https://gun-relay.valiantlynx.com/gun', 'http://localhost:8765/gun'] }); // Ensure you've initialized Gun correctly earlier in your script
       gun.get('companies').set(company);
 
       // Also add to the UI list

@@ -131,7 +131,7 @@
     <script>
       ;(function(){
         // the actual GPS tracking app!
-        var gun = Gun({ peers: ['http://localhost:8765/gun'] });
+        var gun = Gun({ peers: ['https://gun-relay.valiantlynx.com/gun', 'http://localhost:8765/gun'] });
         var gps = {};
         gps.opt = {
           continuous: true, // get location just once uses `getCurrentPosition()` while continuously uses `watchPosition()`
