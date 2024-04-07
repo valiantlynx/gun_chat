@@ -5,7 +5,7 @@
 <script src="../../../gun/sea.js"></script>
 -->
 <script>
-	var gun = Gun({ peers: ['http://localhost:8765/gun'] });
+	var gun = Gun({ peers: ['https://gun-relay.valiantlynx.com/gun', 'http://localhost:8765/gun'] });
 	var user = gun.user && gun.user();
 	if(user){
 		// 1st: call create. 2nd call auth. After that, call recall

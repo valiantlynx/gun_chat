@@ -8,7 +8,7 @@
 	<script src="../../../gun/gun.js"></script>
 	<script src="../../../gun/nts.js"></script>
 	<script>
-		window.gun = Gun({ peers: ['http://localhost:8765/gun'] });
+		window.gun = Gun({ peers: ['https://gun-relay.valiantlynx.com/gun', 'http://localhost:8765/gun'] });
 		requestAnimationFrame(function now(){
 			requestAnimationFrame(now);
 			var time = new Date(Gun.state());
