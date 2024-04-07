@@ -25,5 +25,5 @@ git subtree push --prefix=apps/gun_chat https://github.com/valiantlynx/gun_chat.
 
 git subtree add --prefix=gun https://github.com/amark/gun.git master --squash
 git subtree pull --prefix=gun https://github.com/amark/gun.git master --squash
-git subtree push --prefix=gun https://github.com/amark/gun.git master
+# git subtree push --prefix=gun https://github.com/amark/gun.git master
 ```
