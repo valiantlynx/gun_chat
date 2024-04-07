@@ -1,0 +1,19 @@
+{
+  "name": "relay",
+  "version": "1.0.0",
+  "description": "express server that creates a gundb relay",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "gun": "^0.2020.1240",
+    "nodemon": "^3.1.0"
+  }
+}

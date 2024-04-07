@@ -18,15 +18,7 @@ app.get('/company', function(req, res) {
   res.sendFile(__dirname + '/company.html');
 });
 
-app.get('/gun', function(req, res) {
-  res.send(__dirname + '/index.js');
-});
-
-app.get('/relay', function(req, res) {
-  res.send(__dirname + '/relay.js');
-});
-
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

@@ -16,7 +16,7 @@ dist/
 build/
 out/
 tmp/
-*.tmp/
+*.tmp
 public/assets/
 public/build/
 public/bundle.js

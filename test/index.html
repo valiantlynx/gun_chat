@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>GunDB Chat App</title>
-  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-</head>
-<body>
-  <input id="username" type="text" placeholder="Username" />
-  <input id="message" type="text" placeholder="Message" />
-  <button id="send">Send</button>
-  <div id="messages"></div>
-
-  <script src="chat.js"></script>
-</body>
-</html>
+<ul id='list'></ul>
+<form id='form'>
+  <input id='who' placeholder='name'>
+  <input id='what' placeholder='say'>
+  <input type='submit' value='send'>
+</form>
+<script src="../gun/gun.js"></script>
+<script src="../gun/sea.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emojione@4.0.0/lib/js/emojione.min.js"></script>
+<script>
+  gun = GUN(['http://localhost:3000/gun']), chat = gun.get("note" + location.hash.replace('#', '/')), view = document;
+  form.onsubmit = (eve) => { chat.set(who.value + ': ' + what.value), eve.preventDefault(what.value = "") }
+  chat.map().on(function show(data, id) {
+    (view.line = view.getElementById(id) || view.createElement("li")).id = id;
+    list.appendChild(view.line).innerText = emojione.shortnameToUnicode(data);
+    window.scroll(0, list.offsetHeight);
+    (list.beep = new SpeechSynthesisUtterance()).text = "new";
+    list.beep.rate = 10, list.beep.pitch = 2, window.speechSynthesis.speak(list.beep);
+  });
+</script>
