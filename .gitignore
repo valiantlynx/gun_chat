@@ -8,9 +8,8 @@ pids
 *.pid
 
 # Dependency directories
-node_modules/
+node_modules
 jspm_packages/
-gun/node_modules
 
 # Distribution directories
 dist/
@@ -38,11 +37,8 @@ web_modules/
 # Miscellaneous
 *.DS_Store
 *.env
-*.md
 npm-debug.log*
 yarn-error.log*
 yarn.lock
 package-lock.json
 ./gun/.git
-
-node_modules
