@@ -49,7 +49,7 @@
 <!-- script async src="https://edide.io/music.lib"></script -->
 
 <script>
-var gun = Gun();
+var gun = Gun({ peers: ['http://localhost:8765/gun'] });
 var page = {};
 //var gun = Gun(['https://guntest.herokuapp.com/gun', 'http://localhost:8765/gun']);
 
