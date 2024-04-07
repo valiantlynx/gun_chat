@@ -22,6 +22,10 @@ app.get('/gun', function(req, res) {
   res.send(__dirname + '/index.js');
 });
 
+app.get('/relay', function(req, res) {
+  res.send(__dirname + '/relay.js');
+});
+
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
