@@ -1,11 +1,19 @@
 # gun_chat
 ## local install 
-'''npm i'''
-'''npm start'''
+```bash
+npm i
+```
 
+```bash
+npm start
+```
 ## run
 you need docker and docker-compose
-'''bash install_gun.sh'''
+the gun/ directory is just a clone of the main gun repository nothing touched. so if the gun repository changed just replace it here
+
+```bash
+docker-compose up -d
+```
 
 ### adding new projects with their own git history
 ```sh

@@ -4,17 +4,17 @@ services:
   gun_chat:
     container_name: gun_chat
     build:
-      context: .
+      context: ./chat
       dockerfile: Dockerfile
     restart: always
     ports:
-      - 3000:3000
+      - 3001:3001
 
-  gun:
+  relay:
     container_name: gun
     build:
-      context: ./gun
+      context: ./relay
       dockerfile: Dockerfile
     restart: always
     ports:
-      - 8765:8765
+      - 3000:8765
