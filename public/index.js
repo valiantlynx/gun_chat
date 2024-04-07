@@ -1,6 +1,6 @@
 const gun = Gun(
   //{ peers: ['http://localhost:8765/gun']}
-  { peers: ['https://chat.valiantlynx.com/gun'] }
+  { peers: ['http://localhost:8765/gun'] }
 );
 
 let currentUser = null;
