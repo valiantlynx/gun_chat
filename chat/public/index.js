@@ -161,7 +161,7 @@ function addMessage(data) {
 
       const imageElement = document.createElement('img');
       imageElement.classList.add('image');
-      imageElement.src = `data:image/png;base64,${image}`;
+      imageElement.src = image ? `data:image/png;base64,${image}` : "";
 
       const profileImageElement = document.createElement('img');
       profileImageElement.classList.add('profile-image');
@@ -247,20 +247,18 @@ function deleteAllMessages() {
   // Assuming the data is stored under the path 'data'
   // and each relay is stored under the path 'relays/relay1', 'relays/relay2', etc.
 
-  // const gun = Gun();
+  // Get all the relays
+  gun.get('relays').map().on(function (relayData, relayId) {
+    // Get the data from each relay
+    gun.get('relays').get(relayId).get('data').once(function (data) {
+      // Delete the data from the relay
+      gun.get('relays').get(relayId).put({ data: null });
+    });
+  });
 
-  // // Get all the relays
-  // gun.get('relays').map().on(function (relayData, relayId) {
-  //   // Get the data from each relay
-  //   gun.get('relays').get(relayId).get('data').once(function (data) {
-  //     // Delete the data from the relay
-  //     gun.get('relays').get(relayId).put({ data: null });
-  //   });
-  // });
-
-  // // Alternatively, if you just want to delete the data from the current relay
-  // // you can use the following code:
-  // gun.get('data').put(null);
+  // Alternatively, if you just want to delete the data from the current relay
+  // you can use the following code:
+  gun.get('data').put(null);
 
 
 
@@ -278,7 +276,7 @@ function deleteAllMessages() {
           window.location.reload();
 
         }
-        //console.log(ack);
+        console.log(ack);
       });
     });
 
