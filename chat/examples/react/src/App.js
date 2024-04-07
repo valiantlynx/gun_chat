@@ -7,7 +7,7 @@ import Json from './Json'
 class App extends Component {
   constructor() {
     super();
-    this.gun = Gun(location.origin + '/gun')
+    this.gun = Gun({ peers: ['http://localhost:8765/gun'] })
   }
   
   render() {

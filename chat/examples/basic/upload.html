@@ -15,7 +15,7 @@
 <script src="../../../gun/lib/upload.js"></script>
 
 <script>
-gun = GUN(location.origin + '/gun');
+gun = GUN({ peers: ['http://localhost:8765/gun'] });
 
 $('html, #upload').upload(function resize(eve, up){
   if(up){ return up.shrink(eve, resize, 1024) }

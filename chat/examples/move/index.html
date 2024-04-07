@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Where</title>
+    <!--
+      HELP WANTED!
+      Build decentralized Open Source Uber/Lyft!
+      Need people with experience on:
+       - Leaflet API, zoom and tile coordinates for subscribing to surrounding area.
+       - Creating cute little driving icons that animate with heading/direction.
+    -->
+    <title>Move by Neon ERA</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 		<meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.0.3/dist/leaflet.css"/>
@@ -9,7 +16,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <a id="share" class="hide"><div class="stick button">Share</div></a>
+    <a id="share" class="hide"><div class="stick button">Request Ride</div></a>
     <div id="link" class="hide">
       <p>Copy and Paste this URL to your friends to share your location:</p>
       <center>
@@ -88,6 +95,19 @@
         });
         where.map.addLayer(where.opt.tile);
 
+        L.GridLayer.DebugCoords = L.GridLayer.extend({
+            createTile: function (coords) {
+                var tile = document.createElement('div');
+                tile.innerHTML = [coords.z, coords.x, coords.y].join(', ');
+                tile.style.outline = '1px solid black';
+                return tile;
+            }
+        });
+        L.gridLayer.debugCoords = function(opts) {
+            return new L.GridLayer.DebugCoords(opts);
+        };
+        where.map.addLayer( L.gridLayer.debugCoords() );
+
         where.opt.zoom.ing = where.opt.zoom.ing || function(){
           where.opt.zoom.level = where.map.getZoom();
         }
@@ -103,6 +123,10 @@
             });
             return;
           }
+          var z = 12;
+          var x = lng2tile(latlng.lng, z);
+          var y = lat2tile(latlng.lat, z);
+          console.log(x, y); //
           where.map.setView(latlng, where.opt.zoom.level, {animate: true});
           where.marker = where.marker || L.marker().setLatLng(latlng).addTo(where.map);
           where.marker.setLatLng(latlng).update();
@@ -125,13 +149,16 @@
           });
         }
 
+        function lng2tile(lng,z) { return (Math.floor((lng+180)/360*Math.pow(2,z))) }
+        function lat2tile(lat,z)  { return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,z))) }
+
         return where;
       }
     </script>
     <script>
       ;(function(){
         // the actual GPS tracking app!
-        var gun = Gun(location.origin + '/gun');
+        var gun = Gun({ peers: ['http://localhost:8765/gun'] });
         var gps = {};
         gps.opt = {
           continuous: true, // get location just once uses `getCurrentPosition()` while continuously uses `watchPosition()`
@@ -151,21 +178,21 @@
             });
             $('#share').addClass("hide");
           } else {
-            document.cookie = 'gps=' + (gps.track = (document.cookie.match(/gps\=(.*?)(\&|$|\;)/i)||[])[1] || Gun.text.random(5)); // trick with cookies!
+            document.cookie = 'gps=' + (gps.track = (document.cookie.match(/gps\=(.*?)(\&|$|\;)/i)||[])[1] || String.random(5)); // trick with cookies!
             gps.ref = gun.get('gps/' + gps.track);
             gps.opt.track = function(pos){
               pos = pos.latlng;
               if(gps.follow
-              || Gun.time.is() - gps.when < 1000
+              || Gun.state() - gps.when < 1000
               || gps.last && gps.last.lat == pos.lat && gps.last.lng == pos.lng){
                 return; // throttle!
               }
-              gps.when = Gun.time.is();
+              gps.when = Gun.state();
               gps.ref.put(gps.last = pos);
               //$('#debug').value = JSON.stringify(gps.last);
             }
             gps.where = gps.where || Where(gps.opt);
-            $('#follow').text(("where.gunDB.io/" || (location.origin + location.pathname)) + '#' + gps.track);
+            $('#follow').text((location.origin + location.pathname) + '#' + gps.track);
             $('#share').removeClass("hide");
             $('#share').on('click', function(){
               $('#link').toggleClass("hide");

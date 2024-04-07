@@ -11,7 +11,7 @@
 <script src="../../../gun/sea.js"></script>
 
 <script>
-var gun = Gun(location.origin + '/gun');
+var gun = Gun({ peers: ['http://localhost:8765/gun'] });
 
 gun.get('test').get('video').on(async function(data){
   if($('#pass').val()){ data = await SEA.decrypt(data, $('#pass').val()) }

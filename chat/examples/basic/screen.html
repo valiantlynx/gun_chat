@@ -10,7 +10,7 @@
 <script src="../../../gun/gun.js"></script>
 
 <script>
-var gun = Gun(location.origin + '/gun');
+var gun = Gun({ peers: ['http://localhost:8765/gun'] });
 var record = {recorder: null, recording: false};
 
 $('#record').on('click', ()=>{

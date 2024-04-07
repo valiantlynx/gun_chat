@@ -3,5 +3,5 @@ import Gun from 'gun/gun';
 
 @Injectable()
 export class GunDb {
-    readonly gun = Gun(location.origin + '/gun');
+    readonly gun = Gun({ peers: ['http://localhost:8765/gun'] });
 }

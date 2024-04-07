@@ -12,7 +12,7 @@
 <script src="../../../gun/lib/webrtc.js"></script>
 
 <script>;(async function(){
-streams = {}, gun = Gun(location.origin + '/gun'); //gun = GUN();
+streams = {}, gun = Gun({ peers: ['http://localhost:8765/gun'] }); //gun = GUN();
 mesh = gun.back('opt.mesh');
 
 (await (me.stream = navigator.mediaDevices).enumerateDevices()).forEach((device,i) => {

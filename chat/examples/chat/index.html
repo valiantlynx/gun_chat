@@ -154,7 +154,7 @@
   <script src="/gun.js"></script>
   <script src="/gun/nts.js"></script>
   <script>
-    var gun = Gun(location.origin + '/gun');
+    var gun = Gun({ peers: ['http://localhost:8765/gun'] });
     var chat = gun.get('converse/' + location.hash.slice(1));
 
     $(".chat__submit").on('click', submit);
