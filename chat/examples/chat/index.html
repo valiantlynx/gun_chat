@@ -4,7 +4,7 @@
 <head>
   <title>Converse</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" type="text/css" href="../style.css">
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <style>
     .chat__heading {
@@ -150,9 +150,11 @@
     </div>
   </div>
 
-  <script src="/jquery.js"></script>
-  <script src="/gun.js"></script>
-  <script src="/gun/nts.js"></script>
+<script src="../../../gun/gun.js"></script>
+<script src="../../../gun/axe.js"></script>
+<script src="../../../gun/nts.js"></script>
+<script src="../jquery.js"></script>
+
   <script>
     var gun = Gun({ peers: ['http://localhost:8765/gun'] });
     var chat = gun.get('converse/' + location.hash.slice(1));

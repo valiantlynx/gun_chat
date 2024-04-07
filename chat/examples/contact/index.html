@@ -143,16 +143,16 @@
 		<script src="/Users/mark/Dropbox/Public/gun/db/sea.js"></script>
 		<script src="/Users/mark/Dropbox/Public/gun/db/as.js"></script -->
 
-		<script src="/jquery.js"></script>
-		<script src="/gun.js"></script>
-		<script src="/gun/sea.js"></script>
-		<script src="/gun/as.js"></script>
-		<script src="/gun/nts.js"></script>
+		<script src="../../../gun/gun.js"></script>
+		<script src="../../../gun/nts.js"></script>
+		<script src="../../../gun/sea.js"></script>
+		<script src="../../../gun/as.js"></script>
+		<script src="../jquery.js"></script>
 		<script>
 			// Check out the interactive tutorial
 			// for how to build a simplified version
 			// of this example: https://scrimba.com/c/c2gBgt4
-			var gun = Gun(location.origin+'/gun');
+			var gun = Gun('http://localhost:8765/gun');
 			var app = gun.get('example/contacts/7');
 			var user = gun.user();
 			var c = window.c = {};

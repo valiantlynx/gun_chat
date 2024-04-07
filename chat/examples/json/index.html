@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="../../gun.js"></script>
+		<script src="../../../gun/gun.js"></script>
+		<script src="../jquery.js"></script>
 	</head>
 	<body>
 		<h3>Admin JSON Editor</h3>
@@ -27,7 +28,7 @@
 		</script>
 		<script>
 			var gun = Gun({ peers: ['http://localhost:8765/gun'] });
-			var ref = gun.get('example/json/data');
+			var ref = gun.get('../chat/example/json/data');
 			$('#form').onsubmit = function(e){
 				return ref.path( clean($('#field').value) ).put("value"), false; // add a new field, and cancel the form submit.
 			}
