@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  gun_chat:
-    container_name: gun_chat
+  gun-chat:
+    container_name: gun-chat
     build:
       context: ./chat
       dockerfile: Dockerfile
@@ -10,10 +10,10 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      - relay
+      - gun-relay
 
-  relay:
-    container_name: relay
+  gun-relay:
+    container_name: gun-relay
     build:
       context: ./relay
       dockerfile: Dockerfile
