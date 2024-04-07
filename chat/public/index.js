@@ -165,7 +165,7 @@ function addMessage(data) {
 
       const profileImageElement = document.createElement('img');
       profileImageElement.classList.add('profile-image');
-      profileImageElement.src = `https://avatars.dicebear.com/api/human/${username}.svg`;
+      profileImageElement.src = `https://api.dicebear.com/8.x/lorelei/svg?seed=${username}`;
 
       messageElement.appendChild(profileImageElement);
       messageElement.appendChild(usernameElement);
