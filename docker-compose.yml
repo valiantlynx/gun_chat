@@ -12,7 +12,7 @@ services:
       - ./chat/examples:/var/www/html/examples
       - ./gun:/var/www/html/gun
     ports:
-      - 3000:80
+      - 3000:3000
     depends_on:
       - gun-relay
 
