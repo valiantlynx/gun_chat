@@ -1,4 +1,64 @@
 <!DOCTYPE html>
-<p>This is the examples folder.
-<p>The most basic example is <a href="./basic/note.html">./basic/note.html</a>!</p>
-<p>Home page temporarily disabled.</p>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gun Chat</title>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/chat.css">
+</head>
+
+<body>
+   <!-- Navigation Bar -->
+   <nav >
+    <h1>other gunDB stuff here</h1>
+    <a href="/">Home</a> | 
+    <a href="/company.html">Company</a> |
+  </nav>
+
+  <div class="dark-mode" id="login-form">
+    <h1>Gun Chat</h1>
+    <form>
+      <input type="text" id="username-input" placeholder="Username" />
+      <input type="password" id="password-input" placeholder="Password" />
+      <input type="submit" id="login-button" value="Log In" />
+    </form>
+    <button class="dark-mode button" id="register-button">Register</button>
+  </div>
+
+  <div id="chat-form" style="display: none;">
+    <h1>Gun Chat</h1>
+    <div id="chat"></div>
+    <form>
+      <input type="text" id="chat-input" placeholder="Type your message...">
+      <input type="file" id="image-input" multiple>
+      <input class="dark-mode button is-success" type="button" id="send-button" value="Send">
+    </form>
+    <button class="dark-mode button" id="logout-button">Log Out</button>
+    <button class="dark-mode button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <button onclick="deleteAllMessages()">Delete all messages</button>
+  </div>
+
+
+  <!-- Custom JS -->
+  <script src="../../gun/gun.js"></script>
+  <script src="../../gun/sea.js"></script>
+  <!-- script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script -->
+  <script src="./jquery.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@huggingface/transformers@latest/dist/browser/transformers.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder@latest/dist/universal-sentence-encoder.min.js"></script> -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v0.22.1/full/pyodide.js"></script>
+  <script src="./chat.js"></script>
+  <script>
+    function toggleDarkMode() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+  </script>
+</body>
+
+</html>

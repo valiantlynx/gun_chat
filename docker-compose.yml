@@ -7,8 +7,12 @@ services:
       context: ./chat
       dockerfile: Dockerfile
     restart: always
+    volumes:
+      - ./chat/nginx.conf:/etc/nginx/nginx.conf
+      - ./chat/examples:/var/www/html/examples
+      - ./gun:/var/www/html/gun
     ports:
-      - 3000:3000
+      - 3000:80
     depends_on:
       - gun-relay
 
