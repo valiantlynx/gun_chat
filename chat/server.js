@@ -18,6 +18,8 @@ app.get('/company', function(req, res) {
   res.sendFile(__dirname + '/company.html');
 });
 
+//etc
+
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
