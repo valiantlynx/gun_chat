@@ -384,86 +384,44 @@ function weather(message) {
 async function ai(message) {
   console.log('ai');
   const searchTerm = message.split('@ai ')[1];
-  // addsearchTermMessage(`Hello! How can I assist you today?${searchTerm}`);
-  // async function generateText(searchTerm) {
-  //   const response = await fetch('http://localhost:5000/generate', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({ input_text: searchTerm })
-  //   });
 
-  //   const data = await response.json();
-  //   return data.generated_text;
-  // }
-
-  async function generateText(searchTerm) {
-
-    let pyodide = await loadPyodide();
-    var data = {
-      'message': ['Hello', 'How are you?', 'Goodbye', 'Nice to meet you'],
-      'label': ['greeting', 'question', 'farewell', 'introduction']
+  async function generateText(promptText) {
+    const body = {
+      model: "mistral:7b",
+      prompt: promptText,
+      stream: false,
+      keep_alive: "30m"
     }
 
-    await pyodide.loadPackage("micropip");
+    try {
 
-    const micropip = pyodide.pyimport("micropip");
-    await micropip.install("numpy")
-    await micropip.install(" scikit-learn")
-    await micropip.install("pandas")
-    console.log("Installed packages");
-    await pyodide.runPython(`
-      import pandas as pd
+      const response = await fetch("http://localhost:11434/api/generate", {
+        method: "POST",
+        body: JSON.stringify(body)
+      })
+        .catch(err => console.error(err));
 
-      from sklearn.feature_extraction.text import CountVectorizer
-      from sklearn.naive_bayes import MultinomialNB
+      console.log(response)
 
-      # Step 1: Collect chat data
-      df = pd.DataFrame(${JSON.stringify(data)})
-      print(df)
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-      # Step 2: Preprocess the data
-      vectorizer = CountVectorizer(stop_words='english')
-      X = vectorizer.fit_transform(df['message'])
-      y = df['label']
-
-      # Step 3: Build the chatsearchTerm model
-      model = MultinomialNB()
-
-      # Step 4: Train the model
-      model.fit(X, y)
-
-      # Step 5: Test and refine the chatsearchTerm
-      message = "${searchTerm}"
-      X_test = vectorizer.transform([message])
-      prediction = model.predict(X_test)
-
-      print(prediction)
-      
-
-    `);
-
-
-    const prediction_string = pyodide.globals.get("prediction").toString();
-    const prediction_array = prediction_string.split("'"); // ['[', 'greeting', ']']
-    const prediction = prediction_array[1]; // greeting
-
-    console.log("prediction_string", prediction_string);
-    console.log("prediction_array", prediction_array);
-
-
-    return prediction;
-
+      const data = await response.json();
+      console.log(data)
+      return data.response;  // Use the response key to access the completion text
+    } catch (error) {
+      console.error('Failed to fetch AI completion:', error);
+      return '...';
+    }
   }
 
   // Example usage
   const generatedText = await generateText(searchTerm);
-  addsearchTermMessage(generatedText);
+  this.addsearchTermMessage(generatedText);
   console.log("generatedText", generatedText);
 
 }
-
 function addsearchTermMessage(message) {
   const time = new Date().getTime();
   const id = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36)
